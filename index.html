@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+  <head>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>Spoty Vic</title>
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="jumbotron" ng-controller = "buscarArtistaController">
+      <form ng-submit="submitArtist($event)">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-music" id="basic-addon1"></span>
+          <input type="text" class="form-control" ng-model = "nameArtist" placeholder="Artist Name" aria-describedby="basic-addon1">
+
+          <span class="input-group-btn">
+            <button class="btn btn-secondary glyphicon glyphicon-search" type="button"></button>
+          </span>
+
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+  <div class="container" ng-controller = "selectArtistaController" ng-show = "artistasFac.length">
+    <div class="jumbotron">
+      <h2>{{artistas}}</h2>
+      <div class ="row">
+        <div class ="col-6">
+          <select class="selectpicker show-tick" ng-model ="select" ng-change="albumSelect()">
+             <option ng-repeat="artistas in artistasFac" >{{artistas.name}}</option>
+          </select>
+        </div>
+        <div class ="col-6">
+          <div ng-show = "albums.length">
+
+            <div ng-repeat ="album in albums track by $index">
+                <img  src ="{{album}}" alt="">{{$index}}
+            </div>
+            <img src="https://i.scdn.co/image/3eb977a3296af412165dd9d1ec17eb2740d44ff9" alt="">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" ng-controller = "hestoricoInput" ng-show = "busquedas.length">
+    <div class="jumbotron" >
+      <ul>
+        <li ng-repeat = "busqueda in busquedas"> {{busqueda}}</li>
+      </ul>
+
+
+    </div>
+
+
+  </div>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/controller/controller.js"></script>
+    <script src="app/factory/factory.js"></script>
+  </body>
+</html>
