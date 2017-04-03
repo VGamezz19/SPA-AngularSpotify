@@ -49,8 +49,8 @@
           </select>
     </div>
 
-    <div class="modal fade">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" >
+      <div class="modal-dialog" role="document" style ="width: 45%;">
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">{{singleAlbum.name}}</h3>
@@ -59,7 +59,22 @@
             </button>
           </div>
           <div class="modal-body">
-            <img src="{{singleAlbum.images[1].url}}" alt="">
+            <div class ="row">
+              <div class ="col-md-7 col-lg-7 col-xs-7 col-sm-7">
+                <img src="{{singleAlbum.images[1].url}}" alt="">
+              </div>
+              <div class ="col-md-5 col-lg-5 col-xs-5 col-sm-5">
+                <p>Date: {{singleAlbum.release_date}}</p>
+                <p>Popularity: {{singleAlbum.popularity}}</p>
+                <hr>
+                <h5>Truks</h5>
+
+                <p ng-repeat = "traks in singleAlbum.tracks.items track by $index">
+                  {{$index}} - {{traks.name}}
+                </p>
+              </div>
+            </div>
+
           </div>
           <div class="modal-footer">
             <a href="{{singleAlbum.external_urls.spotify}}" class="btn btn-primary">Spotify link</a>
@@ -72,7 +87,7 @@
       <div class ="row">
 
             <div ng-repeat ="album in albumes track by $index" class ="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                <img  ng-click = "singleSelect($index)" src ="{{album.images[1].url}}" >
+                <img  ng-click = "singleSelect(album.id)" src ="{{album.images[1].url}}" >
             </div>
       </div>
     </div>

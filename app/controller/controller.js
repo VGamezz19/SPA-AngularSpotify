@@ -19,16 +19,8 @@ angular.module('myApp')
 
   .controller('selectArtistaController', function($scope, SpotyFactori){
     $scope.artistas = "Artistas";
-    //console.log("selectController: ",$scope.infoArtistaSelect);
     $scope.$on('artistaFactory', function (event, data) {
-      //console.log('en el otro controller', data); // 'Data to send'
       $scope.artistasFac = data;
-
-
-
-      console.log("ArtistasControllerSelect",$scope.artistasFac);
-
-
       $scope.albumSelect = function () {
 
       for (i = 0; i < $scope.artistasFac.length; i++) {
@@ -36,12 +28,6 @@ angular.module('myApp')
         if($scope.artistasFac[i].name == $scope.select) {
 
           $scope.idArtista = $scope.artistasFac[i].id;
-
-           /*for(j = 0; j< $scope.albumActual.length; j++) {
-
-            $scope.albums.push($scope.albumActual[j].url);
-          }
-          console.log($scope.albums); */
         }
       }
 
@@ -54,20 +40,23 @@ angular.module('myApp')
               alert(msg);
               console.log('ERROOR');
           });
-
-
       }
+    })
 
-      $scope.singleSelect = function(index) {
+    $scope.singleSelect = function(id) {
 
-        $scope.singleAlbum = $scope.albumes[index];
+      SpotyFactori.getInfoAlbum(id).then(function (infoAlbumes) {
 
-        $('.modal').modal('toggle');
-      }
-    });
+            $scope.singleAlbum = infoAlbumes;
+            console.log($scope.singleAlbum);
 
+            }, function (msg) {
+            alert(msg);
+            console.log('ERROOR');
+        });
 
-
+      $('.modal').modal('toggle');
+    }
 
 
   })

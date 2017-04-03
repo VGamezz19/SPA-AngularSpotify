@@ -16,9 +16,6 @@ angular.module("myApp")
                 .then(function() {
                   $rootScope.$broadcast('historicoFac', artist)
                 })
-
-
-
     }
 
     function getAlbum(idArtista){
@@ -28,20 +25,22 @@ angular.module("myApp")
 
       return $http.get(url)
                 .then( getResultsAlbum )
-                /*.then(function(albumes) {
-                  $rootScope.$broadcast('albumFactory', albumes)
-                })
-              /*  .then(function() {
-                  $rootScope.$broadcast('historicoFac', artist)
-                }) */
+    }
 
+    function getInfoAlbum(idAlbum){
 
+      var url = 'https://api.spotify.com/v1/albums/<%ALBUM-ID%>'
+      url = url.replace('<%ALBUM-ID%>',idAlbum)
+
+      return $http.get(url)
+                .then( getResultInfoAlbum )
 
     }
 
     return {
       getArtist: getArtist,
       getAlbum: getAlbum,
+      getInfoAlbum : getInfoAlbum,
     }
   })
 
@@ -56,4 +55,9 @@ angular.module("myApp")
     console.log(response.data);
     //Le pasamos el objeto parseado.
     return response.data.artists.items;
+  }
+
+  function getResultInfoAlbum(response) {
+    console.log(response.data);
+    return response.data;
   }
