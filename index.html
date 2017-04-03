@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  
+
     <title>Spoty Vic</title>
   </head>
   <body>
@@ -48,11 +48,31 @@
              <option ng-repeat="artistas in artistasFac" >{{artistas.name}}</option>
           </select>
     </div>
-    <div class="jumbotron">
-      <div class ="row" ng-show = "albumes.length">
+
+    <div class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">{{singleAlbum.name}}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style = "margin-top: -1.4em;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{singleAlbum.images[1].url}}" alt="">
+          </div>
+          <div class="modal-footer">
+            <a href="{{singleAlbum.external_urls.spotify}}" class="btn btn-primary">Spotify link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jumbotron" ng-show = "albumes.length">
+      <div class ="row">
 
             <div ng-repeat ="album in albumes track by $index" class ="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                <img  src ="{{album.images[1].url}}" >
+                <img  ng-click = "singleSelect($index)" src ="{{album.images[1].url}}" >
             </div>
       </div>
     </div>
@@ -60,9 +80,13 @@
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="app/libs/angular-route.js"></script>
     <script src="app/app.js"></script>
     <script src="app/config.js"></script>
     <script src="app/controller/controller.js"></script>
     <script src="app/factory/factory.js"></script>
+    <script src="app/component/single/single-module.js"></script>
+    <script src="app/component/single/single-component.js"></script>
+    <script src="app/component/single/single-controller.js"></script>
   </body>
 </html>

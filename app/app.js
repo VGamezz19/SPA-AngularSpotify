@@ -1,4 +1,4 @@
 'use strict';
 
 
-angular.module('myApp', []);
+angular.module('myApp', ['ngRoute','single']);

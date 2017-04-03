@@ -46,7 +46,7 @@ angular.module('myApp')
       }
 
         SpotyFactori.getAlbum($scope.idArtista).then(function (albumesApi) {
-              
+
               $scope.albumes = albumesApi;
               console.log($scope.albumes);
 
@@ -56,6 +56,13 @@ angular.module('myApp')
           });
 
 
+      }
+
+      $scope.singleSelect = function(index) {
+
+        $scope.singleAlbum = $scope.albumes[index];
+
+        $('.modal').modal('toggle');
       }
     });
 
