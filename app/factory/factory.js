@@ -21,10 +21,37 @@ angular.module("myApp")
 
     }
 
+    function getAlbum(idArtista){
+
+      var url = 'https://api.spotify.com/v1/artists/<%ARTIST-ID%>/albums'
+      url = url.replace('<%ARTIST-ID%>',idArtista)
+
+      return $http.get(url)
+                .then( getResultsAlbum )
+                /*.then(function(albumes) {
+                  $rootScope.$broadcast('albumFactory', albumes)
+                })
+              /*  .then(function() {
+                  $rootScope.$broadcast('historicoFac', artist)
+                }) */
+
+
+
+    }
+
     return {
       getArtist: getArtist,
+      getAlbum: getAlbum,
     }
   })
+
+//Gets
+
+  function getResultsAlbum(response){
+    console.log(response.data);
+    return response.data.items;
+  }
+
   function getResults(response) {
     console.log(response.data);
     //Le pasamos el objeto parseado.
